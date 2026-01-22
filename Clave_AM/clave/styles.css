@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.keypad {
+    margin-top: 20px;
+}
+
+#password {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.key {
+    padding: 15px;
+    font-size: 18px;
+    background-color: hsla(0, 0%, 0%, 0.986);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.key:hover {
+    background-color: #beacacfd;
+}
+
+#clear {
+    background-color: #635758;
+}
+
+#clear:hover {
+    background-color: #5c4547;
+}
+
+/* Removed redundant styles related to .key.masked, .key.number, .key.number .real, and .key.number .mask */
