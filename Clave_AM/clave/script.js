@@ -1,62 +1,78 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
+
     const input = document.getElementById("password");
-    const keys = document.querySelector(".keys");
-    const clearBtn = document.getElementById("clear");
-
-    let real = "";
-
-    const shuffle = () => {
-        const nums = [...keys.querySelectorAll(".number")];
-        for (let i = nums.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [nums[i], nums[j]] = [nums[j], nums[i]];
-        }
-        nums.forEach(n => keys.insertBefore(n, clearBtn));
-    };
-
-    const hideAllNumbers = () => {
-        [...keys.querySelectorAll(".number")].forEach(button => {
-            button.textContent = "*";
-        });
-    };
-
-    const restoreAllNumbers = () => {
-        [...keys.querySelectorAll(".number")].forEach(button => {
-            button.textContent = button.dataset.original;
-        });
-    };
-
-    keys.addEventListener("mouseover", (e) => {
-        if (e.target.classList.contains("number")) {
-            hideAllNumbers();
-        }
+    const teclado = document.querySelector(".keys");
+    const botonLimpiar = document.getElementById("clear");
+  
+    let contrasena = "";
+  
+    // guardar los números originales
+    const botones = teclado.querySelectorAll(".number");
+    botones.forEach(function (boton) {
+      boton.dataset.original = boton.textContent;
     });
-
-    keys.addEventListener("mouseout", (e) => {
-        if (e.target.classList.contains("number")) {
-            restoreAllNumbers();
-        }
+  
+    // mezclar los botones del teclado
+    function mezclarTeclado() {
+      let numeros = Array.from(teclado.querySelectorAll(".number"));
+  
+      numeros.sort(function () {
+        return Math.random() - 0.5;
+      });
+  
+      numeros.forEach(function (boton) {
+        teclado.insertBefore(boton, botonLimpiar);
+      });
+    }
+  
+    // ocultar todos los números
+    function ocultarNumeros() {
+      let numeros = teclado.querySelectorAll(".number");
+      numeros.forEach(function (boton) {
+        boton.textContent = "*";
+      });
+    }
+  
+    // restaurar los números originales
+    function mostrarNumeros() {
+      let numeros = teclado.querySelectorAll(".number");
+      numeros.forEach(function (boton) {
+        boton.textContent = boton.dataset.original;
+      });
+    }
+  
+    // evento cuando el mouse entra
+    teclado.addEventListener("mouseover", function (e) {
+      if (e.target.classList.contains("number")) {
+        ocultarNumeros();
+      }
     });
-
-    keys.addEventListener("click", e => {
-        const k = e.target;
-        if (!k.classList.contains("number")) {
-            if (k.id === "clear") {
-                real = "";
-                input.value = "";
-            }
-            return;
-        }
-
-        real += k.dataset.original;
-        input.value = real;
-        shuffle();
+  
+    // evento cuando el mouse sale
+    teclado.addEventListener("mouseout", function (e) {
+      if (e.target.classList.contains("number")) {
+        mostrarNumeros();
+      }
     });
-
-    
-    [...keys.querySelectorAll(".number")].forEach((button) => {
-        button.dataset.original = button.textContent.trim();
+  
+    // evento para los clicks
+    teclado.addEventListener("click", function (e) {
+  
+      if (e.target.id === "clear") {
+        contrasena = "";
+        input.value = "";
+        return;
+      }
+  
+      if (e.target.classList.contains("number")) {
+        contrasena = contrasena + e.target.dataset.original;
+        input.value = contrasena;
+  
+        mezclarTeclado();
+      }
     });
-
-    shuffle();
-});
+  
+    // mezclar al iniciar
+    mezclarTeclado();
+  });
+  
