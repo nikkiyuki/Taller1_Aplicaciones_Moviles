@@ -1,58 +1,163 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
+/* =========================
+   RESET BÁSICO
+========================= */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-header {
+html {
+    scroll-behavior: smooth;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    background-color: #f7faf9;
+    color: #2f3e3a;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
+    background-color: #d1fae5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
     z-index: 1000;
 }
 
-.menu ul {
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #065f46;
+}
+
+nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
+    gap: 30px;
 }
 
-.menu li {
-    margin: 0 15px;
-}
-
-.menu a {
-    color: white;
+nav ul li a {
     text-decoration: none;
-    font-size: 18px;
-    transition: color 0.3s;
+    color: #065f46;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.menu a:hover {
-    color: #00bcd4;
+nav ul li a:hover {
+    background-color: #34d399;
+    color: #ffffff;
 }
 
-main {
-    margin-top: 60px; /* Espacio para el menú fijo */
-}
-
+/* =========================
+   SECCIONES GENERALES
+========================= */
 .section {
-    height: 100vh;
+    min-height: 100vh;
+    padding: 100px 20px 100px 60px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    border-bottom: 1px solid #ccc;
+    gap: 40px;
 }
 
-#section1 { background-color: #f4f4f4; }
-#section2 { background-color: #e0e0e0; }
-#section3 { background-color: #cccccc; }
-#section4 { background-color: #b3b3b3; }
+.section h2 {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    color: #1d3319;
+    text-align: left;
+}
+
+.section p {
+    max-width: 700px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #ffffff;
+}
+
+.section button {
+    background-color: #34d399;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.section button:hover {
+    background-color: #059669;
+}
+
+/* =========================
+   SECCIÓN 2 - SERVICIOS
+========================= */
+#section2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: left;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 60px 40px;
+}
+
+#section2 div {
+    flex: 1;
+    min-width: 300px;
+}
+
+#section2 h2 {
+    font-size: 2.5rem;
+    color: #065f46;
+}
+
+#section2 ul {
+    list-style: none;
+}
+
+#section2 ul li {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #374151;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#section2 ul li::before {
+    content: '\2022';
+    color: #34d399;
+    font-weight: bold;
+    width: 1em;
+    margin-right: 10px;
+}
+
+#section2 img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================
+   COLORES POR SECCIÓN
+========================= */
+#section3 {
+    background-color: #90b4cc;
+}
+
+#section4 {
+    background-color: #82b190;
+}
