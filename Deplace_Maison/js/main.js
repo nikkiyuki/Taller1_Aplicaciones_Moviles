@@ -72,6 +72,11 @@ let xInicio = 0;
 let xActual = 0;
 
 ventanaCarrusel?.addEventListener("pointerdown", (e) => {
+  // NO iniciar arrastre si es un botón
+  if (e.target.closest("button")) {
+    return;
+  }
+  
   arrastrando = true;
   xInicio = e.clientX;
   xActual = 0;
@@ -99,7 +104,7 @@ ventanaCarrusel?.addEventListener("pointerup", () => {
 window.addEventListener("resize", actualizarCarrusel);
 
 /* =========================
-   Datos (puedes cambiar nombres/imágenes)
+   Datos
 ========================= */
 const PRODUCTOS = [
   { id: "Zapatos",   nombre: "Zapatos",   temporada: "2026", precioAnterior: 300000, precioActual: 180000, imagen: "assets/img/p1.jpg" },
@@ -109,14 +114,22 @@ const PRODUCTOS = [
   { id: "the-code", nombre: "Camiseta", temporada: "2026", precioAnterior: 190000, precioActual: 100000, imagen: "assets/img/p5.jpg" },
 ];
 
-/* Carrito: id -> { producto, cantidad } */
+
 const carrito = new Map();
 
 /* =========================
     Utilidades
 ========================= */
 function formatoMonedaCOP(valor) {
-  return `$ ${valor} COP`;
+  return valor.toLocaleString("es-CO", {
+    style: "currency",
+    currency: "COP",
+    maximumFractionDigits: 0,
+  });
+}
+
+function buscarProductoPorId(id) {
+  return PRODUCTOS.find((p) => p.id === id);
 }
 
 
@@ -145,6 +158,17 @@ function renderizarProductos() {
       </button>
     </article>
   `).join("");
+
+  // Agregar listeners a los botones después de renderizar
+  const botones = contenedorProductos.querySelectorAll("[data-agregar]");
+  
+  botones.forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+      const id = e.currentTarget.dataset.agregar;
+      agregarAlCarrito(id);
+      actualizarCarritoUI();
+    });
+  });
 }
 
 /* =========================
@@ -181,7 +205,7 @@ function actualizarCarritoUI() {
   const { totalCantidad, subtotal } = calcularTotales();
 
   if (contadorCarrito) contadorCarrito.textContent = String(totalCantidad);
-  if (subtotalCarrito) subtotalCarrito.textContent = `$${subtotal.toFixed(2)}`;
+  if (subtotalCarrito) subtotalCarrito.textContent = formatoMonedaCOP(subtotal);
 
   if (!listaCarrito) return;
 
@@ -225,25 +249,22 @@ function cerrarModalCarrito() {
    Eventos
 ========================= */
 document.addEventListener("click", (e) => {
-  const idAgregar = e.target?.dataset?.agregar;
-  const idQuitar = e.target?.dataset?.quitar;
-  const cerrar = e.target?.dataset?.cerrar;
+  const botonQuitar = e.target.closest("[data-quitar]");
+  const fondoCerrar = e.target.closest("[data-cerrar]");
 
-  if (idAgregar) {
-    agregarAlCarrito(idAgregar);
+  if (botonQuitar) {
+    const id = botonQuitar.dataset.quitar;
+    quitarDelCarrito(id);
     actualizarCarritoUI();
-    abrirModalCarrito();
+    return;
   }
 
-  if (idQuitar) {
-    quitarDelCarrito(idQuitar);
-    actualizarCarritoUI();
-  }
-
-  if (cerrar) {
+  if (fondoCerrar) {
     cerrarModalCarrito();
   }
 });
+
+
 
 if (botonCarrito) {
   botonCarrito.addEventListener("click", () => {
@@ -290,4 +311,70 @@ if (botonSubir) {
 renderizarProductos();
 actualizarCarritoUI();
 actualizarCarrusel();
+
+/* =========================
+   CURSOR ANIMADO
+========================= */
+let cursor = document.querySelector(".cursor");
+if (!cursor) {
+  cursor = document.createElement("div");
+  cursor.className = "cursor";
+  document.body.appendChild(cursor);
+}
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let cursorX = mouseX;
+let cursorY = mouseY;
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animarCursor() {
+  cursorX += (mouseX - cursorX) * 0.15;
+  cursorY += (mouseY - cursorY) * 0.15;
+
+  cursor.style.left = cursorX + "px";
+  cursor.style.top = cursorY + "px";
+
+  requestAnimationFrame(animarCursor);
+}
+animarCursor();
+
+// Hover “activo”
+function activarCursor() { cursor.classList.add("activo"); }
+function desactivarCursor() { cursor.classList.remove("activo"); }
+
+document.addEventListener("mouseover", (e) => {
+  if (e.target.closest("button, a, .tarjeta-producto, .carrusel__boton")) activarCursor();
+});
+
+document.addEventListener("mouseout", (e) => {
+  if (e.target.closest("button, a, .tarjeta-producto, .carrusel__boton")) desactivarCursor();
+});
+
+/* =========================
+   CURSOR TRAIL (RASTRO)
+========================= */
+let ultimoTiempo = 0;
+
+document.addEventListener("mousemove", (e) => {
+  const ahora = Date.now();
+
+  if (ahora - ultimoTiempo < 30) return;
+  ultimoTiempo = ahora;
+
+  const punto = document.createElement("div");
+  punto.className = "cursor-trail";
+  punto.style.left = e.clientX + "px";
+  punto.style.top = e.clientY + "px";
+
+  document.body.appendChild(punto);
+
+  setTimeout(() => {
+    punto.remove();
+  }, 600);
+});
 

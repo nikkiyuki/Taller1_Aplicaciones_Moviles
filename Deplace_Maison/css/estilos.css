@@ -1,16 +1,19 @@
 :root{
-  --fondo: #f3efdf;
-  --papel: #f7f3e6;
-  --tinta: #111;
-  --linea: rgba(0,0,0,.18);
-  --apagado: rgba(0,0,0,.65);
-  --amarillo: #d7cf2e;
+    --fondo: #f3efdf;
+    --papel: #f7f3e6;
+    --tinta: #111;
+    --linea: rgba(0,0,0,.18);
+    --apagado: rgba(0,0,0,.65);
+    --amarillo: #d7cf2e;
+    --pastel: #eadfcf;          
+    --blanco: #ffffff;          
+    --barra: rgba(243,239,223,.92); 
+    --pie: rgba(243,239,223,.75); 
+    --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    --serif: "Playfair Display", serif;
 
-  --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --serif: "Playfair Display", serif;
-
-  --radio: 14px;
-  --sombra: 0 14px 30px rgba(0,0,0,.10);
+    --radio: 14px;
+    --sombra: 0 14px 30px rgba(0,0,0,.10);
 }
 
 *{ box-sizing: border-box; }
@@ -38,7 +41,7 @@ a:hover{ text-decoration: underline; }
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(243,239,223,.92);
+  background: var(--barra);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--linea);
 }
@@ -78,6 +81,7 @@ a:hover{ text-decoration: underline; }
 /* Botones */
 .boton{
   border: 1px solid var(--linea);
+  color: var(--tinta);
   background: transparent;
   padding: 10px 12px;
   border-radius: 999px;
@@ -153,7 +157,7 @@ a:hover{ text-decoration: underline; }
   border: 1px solid var(--linea);
   border-radius: 12px;
   padding: 10px;
-  background: #fff;
+  background: var(--blanco);
 }
 
 .modal__pie{
@@ -210,7 +214,7 @@ a:hover{ text-decoration: underline; }
   border: 1px solid var(--linea);
   border-radius: 12px;
   overflow:hidden;
-  background: #fff;
+  background: var(--blanco);
 }
 
 .tarjeta-hero__imagen{
@@ -297,29 +301,30 @@ a:hover{ text-decoration: underline; }
   background: var(--papel);
   border: 1px solid var(--linea);
   border-radius: var(--radio);
-  padding: 22px 26px;
+  padding: 48px 56px;
 }
 
 .texto-intro{
-  margin: 0 0 8px;
-  font-size: 12px;
-  letter-spacing: .12em;
+  margin: 0 0 14px;
+  font-size: 11px;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  opacity: .75;
+  opacity: .55;
 }
 
 .nosotros__descripcion{
   margin: 0;
-  font-size: clamp(18px, 2.2vw, 26px);
-  line-height: 1.4;
-  color: var(--tinta);
+  max-width: 820px;     /* 👈 clave */
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.25;
 }
+
 
 /* =========================
    PRODUCTOS
 ========================= */
 .productos{
-  padding: 18px 0 26px;
+  padding: 32px 0 42px;
 }
 
 .productos__contenido{
@@ -337,7 +342,8 @@ a:hover{ text-decoration: underline; }
 }
 
 .tarjeta-producto{
-  background: #eadfcf;
+  background: var(--pastel);
+  padding: 14px;
   border: 1px solid var(--linea);
   border-radius: 12px;
   overflow:hidden;
@@ -347,7 +353,7 @@ a:hover{ text-decoration: underline; }
 
 .tarjeta-producto__imagen{
   height: 120px;
-  background: #fff;
+  background: var(--blanco);
   border-bottom: 1px solid var(--linea);
   background-size: cover;
   background-position: center;
@@ -361,22 +367,21 @@ a:hover{ text-decoration: underline; }
 }
 
 .tarjeta-producto__temporada{
-  font-size: 11px;
-  letter-spacing: .10em;
-  text-transform: uppercase;
-  opacity: .8;
+  font-size: 10px;
+  letter-spacing: .22em;
+  opacity: .6;
 }
 
 .tarjeta-producto__nombre{
   font-family: var(--serif);
-  font-size: 16px;
+  font-size: 22px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
 }
 
 .tarjeta-producto__precios{
-  font-size: 12px;
-  display:flex;
-  gap:10px;
-  align-items: baseline;
+  margin-top: 6px;
+  font-size: 13px;
 }
 
 .precio-anterior{ text-decoration: line-through; opacity: .7; }
@@ -399,7 +404,7 @@ a:hover{ text-decoration: underline; }
 ========================= */
 .pie-pagina{
   border-top: 1px solid var(--linea);
-  background: rgba(243,239,223,.75);
+  background: var(--pie);
 }
 
 .pie-pagina__contenido{
@@ -518,4 +523,121 @@ a:hover{ text-decoration: underline; }
   .carrusel__boton--izq{ left: 8px; }
   .carrusel__boton--der{ right: 8px; }
   .tarjeta-producto{ width: 180px; }
+}
+
+/* =========================
+   INK MODE (tema oscuro)
+========================= */
+body.ink{
+  --fondo: #0f0f0f;
+  --papel: #161616;
+  --tinta: #f2f2f2;
+  --linea: rgba(255,255,255,.25);
+  --apagado: rgba(255,255,255,.7);
+  --amarillo: #2a2a2a;
+  --pastel: #242424;              
+  --blanco: #1a1a1a;              
+  --barra: rgba(15,15,15,.92);    
+  --pie: rgba(15,15,15,.75);      
+}
+
+body.ink .cursor{
+  background: #f2f2f2;
+}
+
+body.ink .cursor.activo{
+  border-color: #f2f2f2;
+}
+
+body{
+  transition: background-color .3s ease, color .3s ease;
+}
+
+.barra-superior,
+.hero__contenido,
+.nosotros__contenido,
+.productos__contenido,
+.pie-pagina{
+  transition: background-color .3s ease, border-color .3s ease;
+}
+
+section{
+  margin-bottom: 42px;
+}
+
+@keyframes aparecer{
+  from{
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animar-texto{
+  animation: aparecer .8s ease forwards;
+}
+
+/* =========================
+   CURSOR ANIMADO
+========================= */
+.cursor{
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--tinta);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 999999;
+  transition: width .25s ease, height .25s ease, background .25s ease;
+}
+
+.cursor.activo{
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: 1px solid var(--tinta);
+}
+
+body{ cursor: none; }
+
+/* =========================
+   CURSOR TRAIL 
+========================= */
+.cursor-trail{
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tinta);
+  pointer-events: none;
+  z-index: 999998;
+  transform: translate(-50%, -50%);
+  opacity: .6;
+  animation: desvanecer .6s ease forwards;
+}
+
+@keyframes desvanecer{
+  to{
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
+/* Ink mode */
+body.ink .cursor-trail{
+  background: #f2f2f2;
+}
+
+/* Ocultar cursor nativo*/
+body, a, button, input, textarea, select, label,
+.tarjeta-producto, .carrusel__boton {
+  cursor: none !important;
+}
+
+.cursor, .cursor-trail{
+  pointer-events: none !important;
 }

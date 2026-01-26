@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Debug</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .test { margin: 10px 0; padding: 10px; background: #eee; }
+    </style>
+</head>
+<body>
+    <h1>Debug Test</h1>
+    
+    <div id="listaProductos" class="carrusel__pista">
+        <!-- Los productos se cargarán aquí -->
+    </div>
+
+    <button id="testBtn">Test Button</button>
+
+    <script>
+        console.log("=== INICIANDO TEST ===");
+        
+        const $ = (selector) => document.querySelector(selector);
+        
+        // Test 1: Verificar si el elemento existe
+        const contenedorProductos = $("#listaProductos");
+        console.log("1. Contenedor encontrado:", !!contenedorProductos);
+        
+        // Test 2: Array de productos
+        const PRODUCTOS = [
+            { id: "Zapatos", nombre: "Zapatos", temporada: "2026", precioAnterior: 300000, precioActual: 180000, imagen: "assets/img/p1.jpg" }
+        ];
+        console.log("2. Productos cargados:", PRODUCTOS);
+        
+        // Test 3: Función para renderizar
+        function formatoMonedaCOP(valor) {
+            return valor.toLocaleString("es-CO", {
+                style: "currency",
+                currency: "COP",
+                maximumFractionDigits: 0,
+            });
+        }
+        
+        function renderizarProductos() {
+            if (!contenedorProductos) {
+                console.log("3. ❌ Contenedor no encontrado!");
+                return;
+            }
+            
+            console.log("3. ✅ Renderizando productos...");
+            contenedorProductos.innerHTML = PRODUCTOS.map((p) => `
+                <article class="tarjeta-producto">
+                    <div class="tarjeta-producto__cuerpo">
+                        <div class="tarjeta-producto__nombre">${p.nombre}</div>
+                        <div class="tarjeta-producto__precios">
+                            <span class="precio-actual">${formatoMonedaCOP(p.precioActual)}</span>
+                        </div>
+                    </div>
+                    <button class="tarjeta-producto__boton" type="button" data-agregar="${p.id}">
+                        Agregar al carrito
+                    </button>
+                </article>
+            `).join("");
+            
+            // Agregar listeners
+            contenedorProductos.querySelectorAll("[data-agregar]").forEach((boton) => {
+                console.log("4. ✅ Agregando listener a botón:", boton.dataset.agregar);
+                boton.addEventListener("click", (e) => {
+                    console.log("🟢 CLICK DETECTADO EN:", e.currentTarget.dataset.agregar);
+                });
+            });
+        }
+        
+        renderizarProductos();
+        
+        // Test directo
+        const testBtn = $("#testBtn");
+        testBtn.addEventListener("click", () => {
+            console.log("🔵 Test button clickeado");
+        });
+    </script>
+</body>
+</html>
