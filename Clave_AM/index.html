@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de Clave</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main class="container">
+        <h1>Sucursal Bancaria</h1>
+        <p>Ingrese su clave de acceso</p>
+
+        <!-- Display de la clave -->
+        <input 
+            type="text" 
+            id="password" 
+            placeholder="clave acá"
+            readonly 
+            aria-label="Clave de acceso"
+        >
+
+        <!-- Teclado numérico -->
+        <div class="keys">
+            <button class="key number">1</button>
+            <button class="key number">2</button>
+            <button class="key number">3</button>
+            <button class="key number">4</button>
+            <button class="key number">5</button>
+            <button class="key number">6</button>
+            <button class="key number">7</button>
+            <button class="key number">8</button>
+            <button class="key number">9</button>
+            <button class="key" id="clear">borrar</button>
+            <button class="key number">0</button>
+            
+        </div>
+
+        <!-- Botón de acción -->
+        <!-- Eliminado el botón de ingresar -->
+
+        <!-- Mensaje de estado -->
+        <p id="message"></p>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
