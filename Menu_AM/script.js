@@ -1,15 +1,20 @@
-// Agregar un evento de clic a los enlaces del menú
-const menuLinks = document.querySelectorAll('.menu a');
+// Selecciona todos los enlaces del menú de navegación
+const enlacesMenu = document.querySelectorAll('nav a');
 
-menuLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-        event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+// Recorre cada enlace
+enlacesMenu.forEach(enlace => {
+    enlace.addEventListener('click', function (evento) {
+        // Evita el salto brusco por defecto
+        evento.preventDefault();
 
-        const targetId = link.getAttribute('href').substring(1); // Obtener el ID de la sección objetivo
-        const targetSection = document.getElementById(targetId);
+        // Obtiene el id de la sección destino (sin el #)
+        const idSeccion = this.getAttribute('href').substring(1);
 
-        // Desplazarse suavemente hacia la sección objetivo
-        targetSection.scrollIntoView({
+        // Busca la sección en el documento
+        const seccionDestino = document.getElementById(idSeccion);
+
+        // Desplazamiento suave hacia la sección
+        seccionDestino.scrollIntoView({
             behavior: 'smooth'
         });
     });
