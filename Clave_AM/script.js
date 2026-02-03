@@ -75,4 +75,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // mezclar al iniciar
     mezclarTeclado();
   });
-  
+  teclado.addEventListener("touchstart", function (e) {
+  if (e.target.classList.contains("number")) {
+    ocultarNumeros();
+  }
+});
+
+teclado.addEventListener("touchend", function (e) {
+  if (e.target.classList.contains("number")) {
+    mostrarNumeros();
+  }
+});

@@ -1,21 +1,27 @@
-// Selecciona todos los enlaces del menú de navegación
+
 const enlacesMenu = document.querySelectorAll('nav a');
 
-// Recorre cada enlace
+// Recorre cada enlace del menú
 enlacesMenu.forEach(enlace => {
-    enlace.addEventListener('click', function (evento) {
-        // Evita el salto brusco por defecto
-        evento.preventDefault();
 
-        // Obtiene el id de la sección destino (sin el #)
+    // Agrega un evento cuando se hace clic en el enlace
+    enlace.addEventListener('click', function (e) {
+
+        // Evita el comportamiento por defecto del enlace
+        // (que sería saltar directamente a la sección)
+        e.preventDefault();
+
+        // Obtiene el valor del atributo href del enlace (ej: "#section1")
+        // y elimina el símbolo "#" para quedarse solo con el id
         const idSeccion = this.getAttribute('href').substring(1);
 
-        // Busca la sección en el documento
-        const seccionDestino = document.getElementById(idSeccion);
+        // Busca en el documento el elemento que tenga ese id
+        const seccion = document.getElementById(idSeccion);
 
-        // Desplazamiento suave hacia la sección
-        seccionDestino.scrollIntoView({
+        // Desplaza la pantalla suavemente hasta la sección encontrada
+        seccion.scrollIntoView({
             behavior: 'smooth'
         });
     });
 });
+

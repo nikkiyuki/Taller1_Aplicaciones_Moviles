@@ -1,6 +1,4 @@
-/* =========================
-   RESET BÁSICO
-========================= */
+/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -8,21 +6,13 @@
     font-family: 'Poppins', sans-serif;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-/* =========================
-   BODY
-========================= */
+/* BODY */
 body {
     background-color: #f7faf9;
     color: #2f3e3a;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* NAVBAR */
 nav {
     position: fixed;
     top: 0;
@@ -53,111 +43,100 @@ nav ul li a {
     font-weight: 500;
     padding: 8px 14px;
     border-radius: 20px;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 nav ul li a:hover {
     background-color: #34d399;
-    color: #ffffff;
+    color: white;
 }
 
-/* =========================
-   SECCIONES GENERALES
-========================= */
+/* ESPACIO POR NAV FIJO */
+main {
+    padding-top: 90px;
+}
+
+/* SECCIONES GENERALES */
 .section {
     min-height: 100vh;
-    padding: 100px 20px 100px 60px;
+    padding: 60px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
 }
 
-.section h2 {
-    font-size: 5rem;
-    margin-bottom: 20px;
-    color: #1d3319;
-    text-align: left;
-}
-
-.section p {
-    max-width: 700px;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: #ffffff;
-}
-
-.section button {
-    background-color: #34d399;
+/* HERO */
+.hero {
+    background-image: url("perrito.jpeg");
+    background-size: cover;
+    background-position: center;
     color: white;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.hero button {
+    background-color: #34d399;
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
-    font-size: 1rem;
+    color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.section button:hover {
-    background-color: #059669;
+/* SERVICIOS */
+.services {
+    flex-direction: row;
+    gap: 40px;
 }
 
-/* =========================
-   SECCIÓN 2 - SERVICIOS
-========================= */
-#section2 {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: left;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 60px 40px;
-}
-
-#section2 div {
+.services-text {
     flex: 1;
-    min-width: 300px;
 }
 
-#section2 h2 {
-    font-size: 2.5rem;
-    color: #065f46;
+.services-img {
+    flex: 1;
 }
 
-#section2 ul {
-    list-style: none;
-}
-
-#section2 ul li {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #374151;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-}
-
-#section2 ul li::before {
-    content: '\2022';
-    color: #34d399;
-    font-weight: bold;
-    width: 1em;
-    margin-right: 10px;
-}
-
-#section2 img {
+.services-img img {
     max-width: 100%;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* =========================
-   COLORES POR SECCIÓN
-========================= */
+/* COLORES */
 #section3 {
     background-color: #90b4cc;
 }
 
 #section4 {
     background-color: #82b190;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .section {
+        padding: 40px 20px;
+    }
+
+    .services {
+        flex-direction: column;
+    }
+
+    .section h2 {
+        font-size: 2.2rem;
+    }
 }
